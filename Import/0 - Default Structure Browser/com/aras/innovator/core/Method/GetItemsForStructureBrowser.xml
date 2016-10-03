@@ -1,0 +1,51 @@
+﻿<AML>
+ <Item type="Method" id="F47D87B2066F45F3A601C01D303581D1" action="add">
+  <comments>Reverted to default by "Override Default Structure Browser" Project</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[XmlElement inItem = (XmlElement)this.dom.SelectSingleNode("//Item[@type='Method' and @action='GetItemsForStructureBrowser']/Item");
+if (inItem != null)
+{
+      XmlDocument resDOM = Aras.Server.Core.XmlProxy.CreateNewXMLDocument();
+      XmlElement result = Aras.Server.Core.XmlProxy.MakeBorders(resDOM);
+
+    // MyStructureBrowser sb = new MyStructureBrowser(CCO.Variables.InnDatabase, CCO.Cache);
+    Aras.Server.Core.StructureBrowser sb = new Aras.Server.Core.StructureBrowser(ref CCO);
+
+    int levelsToSelect;
+    if (!Int32.TryParse(inItem.GetAttribute("levels"), out levelsToSelect))
+        levelsToSelect = 2;
+
+    result.InnerXml = sb.GetItemsForStructureBrowser(inItem.GetAttribute("type"), 
+        inItem.GetAttribute("id"), 
+        inItem.GetAttribute("compareToITName"), 
+        inItem.GetAttribute("compareToId"), 
+        levelsToSelect
+    );
+    
+    Aras.IOM.Item resItem = this.newItem("");
+    resItem.loadAML(resDOM.OuterXml);
+    return resItem;
+}
+else
+    return null;
+
+
+// StructureBrowser class can be overriden.
+// Methods available for overriding: GetKeyedNameForItem, CompareItems.
+// Just uncomment next code and change MyStructureBrowser to required.
+
+//}
+//    public class MyStructureBrowser : Aras.Server.Core.StructureBrowser
+//    {
+//      public MyStructureBrowser(Aras.Server.Core.InnovatorDatabase dbConnection, Aras.Server.Core.Cache cache) : base(dbConnection, cache)
+//      {
+//      }
+//	
+//      public string CompareItems(XmlElement itemType, string firstItemId, string compareToId, string levelsToSelect)
+//      {
+//        return "";
+//      }]]></method_code>
+  <method_type>C#</method_type>
+  <name>GetItemsForStructureBrowser</name>
+ </Item>
+</AML>

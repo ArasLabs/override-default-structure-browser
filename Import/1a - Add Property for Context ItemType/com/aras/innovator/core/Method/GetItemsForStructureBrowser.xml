@@ -1,0 +1,84 @@
+﻿<AML>
+ <Item type="Method" id="F47D87B2066F45F3A601C01D303581D1" action="add">
+  <comments>Customized by "Override Default Structure Browser" Project. Adds a property to the context ItemType.</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[XmlElement inItem = (XmlElement)this.dom.SelectSingleNode("//Item[@type='Method' and @action='GetItemsForStructureBrowser']/Item");
+
+if (inItem != null)
+{
+      XmlDocument resDOM = Aras.Server.Core.XmlProxy.CreateNewXMLDocument();
+      XmlElement result = Aras.Server.Core.XmlProxy.MakeBorders(resDOM);
+
+    //Comment out call to standard structure browser
+    //Aras.Server.Core.StructureBrowser sb = new Aras.Server.Core.StructureBrowser(ref CCO);
+
+    //Call for custom browser
+    CustomStructureBrowser sb = new CustomStructureBrowser(CCO);
+    //Add property for getting Class
+    sb.itemPropertiesToSelect.Add(inItem.GetAttribute("type"), new string[] {"classification" }); 
+
+    int levelsToSelect;
+    if (!Int32.TryParse(inItem.GetAttribute("levels"), out levelsToSelect))
+        levelsToSelect = 2;
+
+    result.InnerXml = sb.GetItemsForStructureBrowser(inItem.GetAttribute("type"),
+        inItem.GetAttribute("id"),
+        inItem.GetAttribute("compareToITName"),
+        inItem.GetAttribute("compareToId"),
+        levelsToSelect
+    );
+
+    Aras.IOM.Item resItem = this.newItem("");
+    resItem.loadAML(resDOM.OuterXml);
+    return resItem;
+}
+else
+    return null;
+
+// StructureBrowser class can be overriden.
+// Methods available for overriding: GetKeyedNameForItem, CompareItems.
+}
+
+class CustomStructureBrowser : Aras.Server.Core.StructureBrowser
+{
+    public CustomStructureBrowser(Aras.Server.Core.CallContext CCO) : base(ref CCO){}
+    public override Aras.Server.Core.StructureItem GetNewStructureItem(string itemTypeName, Aras.Server.Core.InnovatorDataSet rs)
+    {
+        return new CustomStructureItem(rs); //Call to get our custom StructureItem
+    }
+ }
+
+ class CustomStructureItem : Aras.Server.Core.StructureItem
+ {
+    private string _classification;
+
+    public CustomStructureItem(Aras.Server.Core.InnovatorDataSet rs) : base(rs)
+    {
+    	try
+        {
+        	_classification = rs["classification", ""].ToString(); // property added by above
+    	}
+        catch {} // property not returned for this ItemType
+    }
+
+    public override string KeyedName
+    {
+        get
+        {
+            string kn = base.KeyedName;
+            if (String.IsNullOrEmpty(this._classification))
+            {
+                // If property is empty - return KeyedName as is. (standard look)
+                return kn;
+            }
+            else
+            {
+                return kn + " Class: " + this._classification;
+            }
+        }
+    }
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>GetItemsForStructureBrowser</name>
+ </Item>
+</AML>
