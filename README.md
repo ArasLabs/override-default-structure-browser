@@ -30,7 +30,9 @@ This package customizes the icon displayed with each item in the Structure Brows
 ## Project Details
 
 **Built Using:** Aras 11.0 SP7
-**Browsers Tested:** Internet Explorer 11
+**Browsers Tested:** Internet Explorer 11, Firefox 38 ESR, Chrome
+
+> Though built and tested using Aras 11.0 SP7, this project may function in older releases of Aras 11.0 and Aras 10.0.
 
 ## Installation
 
@@ -80,4 +82,8 @@ The Structure Browser will appear according to the customizations defined by the
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
+For more information on contributing to this project, another Aras Labs project, or any Aras Community project, shoot us an email at araslabs@aras.com.
+
 ## License
+
+Aras Labs projects are published to Github under the MIT license. See the [LICENSE file](./LICENSE.md) for license rights and limitations.
