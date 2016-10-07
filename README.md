@@ -47,8 +47,8 @@ This package customizes the icon displayed with each item in the Structure Brows
 
 ### Install Steps
 
->> Note: Install project packages one at a time.
->> Each package modifies the same Method item, so the last package imported will always overwrite the changes made by any others.
+> Note: Install project packages one at a time.
+> Each package modifies the same Method item, so the last package imported will always overwrite the changes made by any others.
 
 1. Backup your database and store the BAK file in a safe place.
 2. Open up the Aras Package Import tool.
