@@ -18,7 +18,7 @@ if (inItem != null)
     int levelsToSelect;
     if (!Int32.TryParse(inItem.GetAttribute("levels"), out levelsToSelect))
     levelsToSelect = 2;
-    
+
     result.InnerXml = sb.GetItemsForStructureBrowser(inItem.GetAttribute("type"),
         inItem.GetAttribute("id"),
         inItem.GetAttribute("compareToITName"),
@@ -48,7 +48,7 @@ class CustomStructureBrowser : Aras.Server.Core.StructureBrowser
 
     public override Aras.Server.Core.StructureItem GetNewStructureItem(string itemTypeName, Aras.Server.Core.InnovatorDataSet rs)
     {
-        if (itemTypeName = itPart)
+        if (itemTypeName == itPart)
         {
             // Call to get our custom StructureItem
             return new CustomStructureItem(rs);
@@ -85,7 +85,7 @@ class CustomStructureItem : Aras.Server.Core.StructureItem
 		// custom images should be placed in Innovator/Client/customer
                 if (_state == "Released")
                 {
-                    return "../images/QualityItem.svg"; 
+                    return "../images/QualityItem.svg";
                 }
                 else if (_state == "Preliminary")
                 {
