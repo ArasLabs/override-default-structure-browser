@@ -27,6 +27,11 @@ This package customizes the icon displayed with each item in the Structure Brows
 
 **Example:** When viewing the Structure Browser, Parts in the "Released" state will be displayed with one custom icon and Parts in the "Preliminary" state will be displayed with a second custom icon. All other Part items will be displayed with the default ItemType icon.
 
+## Project Details
+
+**Built Using:** Aras 11.0 SP7
+**Browsers Tested:** Internet Explorer 11
+
 ## Installation
 
 #### Important!
@@ -40,7 +45,7 @@ This package customizes the icon displayed with each item in the Structure Brows
 
 ### Install Steps
 
->> Note: Install project packages one at a time. 
+>> Note: Install project packages one at a time.
 >> Each package modifies the same Method item, so the last package imported will always overwrite the changes made by any others.
 
 1. Backup your database and store the BAK file in a safe place.
