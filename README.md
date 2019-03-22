@@ -38,7 +38,7 @@ Release | Notes
 
 Project | Aras
 --------|------
-[v1.0.1](https://github.com/ArasLabs/override-default-structure-browser/releases/tag/v1.0.1) | 10.0 SPx, 11.0 SP7+, 11.0 SP12+, 11.0 SP15
+[v1.0.1](https://github.com/ArasLabs/override-default-structure-browser/releases/tag/v1.0.1) | 10.0 SPx, 11.0 SPx
 [v1.0.0](https://github.com/ArasLabs/override-default-structure-browser/releases/tag/v1.0.0) | 10.0 SPx, 11.0 SP7; Old Community Board Migration
 
 ## Installation
